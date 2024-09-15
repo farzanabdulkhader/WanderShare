@@ -1,4 +1,22 @@
-server/.env
+
+
+
+
+# Ignore node_modules and log files
+node_modules/
 server/node_modules
-client/.env
+
 client/node_modules
+*.log
+
+# Ignore .env files
+client/.env
+server/.env
+
+# Ignore build folder (optional, if you're building on the server)
+client/build/
+client/dist
+
+# Ignore any OS-specific files
+.DS_Store
+Thumbs.db
