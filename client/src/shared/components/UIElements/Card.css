@@ -1,0 +1,17 @@
+.card {
+  margin-top: 20px;
+  background-color: #fafafa;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+}
+
+.card p {
+  font-size: 18px;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.card div {
+  margin-top: 0.5rem;
+  float: right;
+}

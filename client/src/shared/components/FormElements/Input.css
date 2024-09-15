@@ -1,0 +1,55 @@
+input {
+  height: 2.25rem;
+  border-radius: 1rem;
+  width: 100%;
+}
+textarea {
+  resize: none;
+  border-radius: 0.2rem;
+}
+
+input,
+textarea {
+  border: none;
+  background-color: #fafafa;
+  outline: none;
+  color: var(--navy);
+  width: 100%;
+  padding: 2px 1rem;
+}
+
+input.not-valid,
+textarea.not-valid {
+  border: 1px solid red;
+  background-color: pink;
+}
+label {
+  color: var(--yellow);
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--blue);
+  opacity: 0.5;
+}
+
+input:focus,
+textarea:focus {
+  background-color: #fafafa;
+  color: var(--navy);
+  outline: 3px solid var(--blue);
+  border: none;
+}
+
+p.not-valid {
+  color: red;
+  font-size: 11.5px;
+  line-height: 13px;
+  margin-top: 4px;
+  padding: 3px;
+  background-color: var(--yellow);
+  opacity: 1;
+  border-radius: 2px;
+}

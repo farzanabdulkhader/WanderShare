@@ -1,0 +1,41 @@
+.user-item {
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--navy);
+  color: var(--orange);
+  transition: all 0.2s;
+  max-width: 50rem;
+  width: 100%;
+  margin: auto;
+
+  /* min-width: 40rem; */
+}
+
+.user-item:hover {
+  background-color: var(--orange);
+  color: var(--navy);
+}
+
+/* .user-item:hover p {
+  color: var(--orange);
+} */
+
+.user-img {
+  width: 5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.user-name {
+  font-weight: 400;
+}
+
+.user-text {
+  padding-left: 1rem;
+}
+
+.user-places {
+  color: #fff;
+}

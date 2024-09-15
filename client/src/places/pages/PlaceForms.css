@@ -1,0 +1,21 @@
+.add-place-form {
+  background-color: var(--navy);
+  border-radius: 0.5rem;
+  display: flex;
+  width: 40rem;
+  flex-direction: column;
+  padding: 2rem 2.5rem;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+
+.update-place-form {
+  background-color: var(--navy);
+  border-radius: 0.5rem;
+  display: flex;
+  width: 40rem;
+  flex-direction: column;
+  padding: 2rem 2.5rem;
+  margin-top: 3rem;
+  gap: 1rem;
+}

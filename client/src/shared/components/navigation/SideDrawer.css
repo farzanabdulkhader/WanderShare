@@ -1,0 +1,18 @@
+.side-drawer {
+  background-color: #fafafa;
+  width: 70%;
+  z-index: 100;
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+}
+
+.side-drawer.show {
+  transform: translateX(0);
+}

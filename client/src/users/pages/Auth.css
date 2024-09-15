@@ -1,0 +1,36 @@
+.form-auth {
+  background-color: var(--navy);
+  border-radius: 0.5rem;
+  display: flex;
+  width: 40rem;
+  flex-direction: column;
+  padding: 2.5rem;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+
+.switch-text {
+  font-size: smaller;
+  color: #fafafa;
+}
+
+.signup-input-group {
+  display: flex;
+  /* border: 1px solid greenyellow; */
+  flex-direction: column;
+  width: 100%;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 1rem;
+  /* margin-left: 1rem; */
+}
+
+.signup-link {
+  text-decoration: underline;
+  transition: all 0.2s;
+}
+
+.signup-link:hover {
+  color: var(--yellow);
+  cursor: pointer;
+}
