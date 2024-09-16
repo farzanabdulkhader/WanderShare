@@ -15,7 +15,7 @@ const app = express();
 
 const corsOptions = {
   origin: process.env.FRONTEND_URL || "*", // Fallback to allow all origins if not set
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
