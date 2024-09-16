@@ -9,15 +9,21 @@ import path from "path";
 import cors from "cors";
 import fs from "fs";
 
-// Add a CORS configuration
-const corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-};
-
 dotenv.config();
 
 const app = express();
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "*", // Fallback to allow all origins if not set
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+if (!process.env.FRONTEND_URL) {
+  console.warn(
+    "Warning: FRONTEND_URL is not defined, defaulting to allow all origins."
+  );
+}
 
 app.use(cors(corsOptions));
 
