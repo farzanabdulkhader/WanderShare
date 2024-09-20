@@ -68,7 +68,11 @@ function PlaceItem({ place }) {
           </Button>
           {isAuthenticated && user.id === place.creator && (
             <>
-              <Button size="small" onClick={() => handleUpdate(place.id)}>
+              <Button
+                size="small"
+                onClick={() => handleUpdate(place.id)}
+                disabled={isLoading}
+              >
                 EDIT
               </Button>
               <Button size="small" style="danger" onClick={handleDelete}>
