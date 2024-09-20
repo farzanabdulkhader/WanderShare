@@ -12,20 +12,20 @@ dotenv.config();
 
 // Cloudinary configuration
 cloudinary.v2.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
+  cloud_name: process.env.production.CLOUD_NAME,
+  api_key: process.env.production.CLOUD_API_KEY,
+  api_secret: process.env.production.CLOUD_API_SECRET,
 });
 
 const app = express();
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "*", // Fallback to allow all origins if not set
+  origin: process.env.production.FRONTEND_URL || "*", // Fallback to allow all origins if not set
   methods: ["GET", "POST", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-if (!process.env.FRONTEND_URL) {
+if (!process.env.production.FRONTEND_URL) {
   console.warn(
     "Warning: FRONTEND_URL is not defined, defaulting to allow all origins."
   );
@@ -75,11 +75,11 @@ app.use((error, req, res, next) => {
 // Connect to the database and start the server
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.x6zhruo.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`
+    `mongodb+srv://${process.env.production.DB_USER}:${process.env.production.DB_PASSWORD}@cluster0.x6zhruo.mongodb.net/${process.env.production.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`
   )
   .then(() =>
-    app.listen(process.env.PORT, () =>
-      console.log(`Server running on port ${process.env.PORT}`)
+    app.listen(process.env.production.PORT, () =>
+      console.log(`Server running on port ${process.env.production.PORT}`)
     )
   )
   .catch((err) => console.log("Database connection error:", err.message));
