@@ -78,7 +78,7 @@ function PlaceItem({ place }) {
           )}
         </div>
 
-        {isLoading && <LoadingSpinner />}
+        {isLoading && <LoadingSpinner asOverlay />}
 
         <Modal
           show={showConfirmModal}

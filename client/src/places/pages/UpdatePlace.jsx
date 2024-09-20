@@ -96,16 +96,11 @@ function UpdatePlace() {
 
   return (
     <>
-      {/* {!selectedPlace && !error && isLoading && (
-        <div className="center">
-          <LoadingSpinner />
-        </div>
-      )} */}
       {isLoading && <LoadingSpinner asOverlay />}
       {error && <ErrorModal error={error} onClear={clearError} />}
-      {/* {!isLoading && !error && !selectedPlace && (
+      {!isLoading && !error && !selectedPlace && (
         <ErrorModal error="No Place Found" onClear={clearError} />
-      )} */}
+      )}
       {selectedPlace && (
         <div className="container">
           <form className="update-place-form" onSubmit={handleSubmitForm}>
