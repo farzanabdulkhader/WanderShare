@@ -7,7 +7,7 @@ import {
   updatePlace,
   deletePlace,
 } from "../controllers/places-controllers.js";
-import { placeImageUpload } from "../middlewares/file-upload.js";
+import placeImageUpload from "../middlewares/file-upload.js";
 import checkAuth from "../middlewares/check-auth.js";
 
 const router = express.Router();
@@ -20,7 +20,7 @@ router.use(checkAuth);
 
 router.post(
   "/",
-  placeImageUpload.single("image"),
+  placeImageUpload,
   [
     // Validation checks for the request body
     check("title").not().isEmpty(),

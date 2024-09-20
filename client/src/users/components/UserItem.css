@@ -9,8 +9,6 @@
   max-width: 50rem;
   width: 100%;
   margin: auto;
-
-  /* min-width: 40rem; */
 }
 
 .user-item:hover {
@@ -18,12 +16,8 @@
   color: var(--navy);
 }
 
-/* .user-item:hover p {
-  color: var(--orange);
-} */
-
 .user-img {
-  width: 5rem;
+  width: 4.5rem;
   height: 4.5rem;
   object-fit: cover;
   border-radius: 50%;

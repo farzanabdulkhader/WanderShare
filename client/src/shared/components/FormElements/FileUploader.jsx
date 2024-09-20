@@ -45,7 +45,13 @@ function FileUploader({ onInput, id, uploadField = "" }) {
   return (
     <div className={`preview-img ${uploadField}`}>
       <label>Upload image</label>
-      <img src={imagePreviewUrl} alt="Preview" />
+      <div className={`preview-container ${uploadField}`}>
+        {imagePreviewUrl ? (
+          <img src={imagePreviewUrl} alt="Preview" />
+        ) : (
+          <p>Please pic an image</p>
+        )}
+      </div>
       <input
         style={{ display: "none" }}
         type="file"

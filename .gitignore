@@ -11,7 +11,9 @@ client/node_modules
 
 # Ignore .env files
 client/.env
+client/.env.production
 server/.env
+server/.env.production
 
 # Ignore build folder (optional, if you're building on the server)
 client/build/

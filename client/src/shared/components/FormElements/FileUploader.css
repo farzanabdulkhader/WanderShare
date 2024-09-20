@@ -9,11 +9,9 @@
 }
 
 .preview-img.user-image img {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  width: 8rem;
-  height: 8rem;
-  margin-top: 0.3rem;
-  background-color: #fff;
 }
 
 .preview-img.place-image {
@@ -28,8 +26,34 @@
 
 .preview-img.place-image img {
   width: 100%;
+  height: 100%;
+  border-radius: 0.2rem;
+}
+
+.preview-container.place-image {
+  width: 100%;
   height: 20rem;
   border-radius: 0.2rem;
   margin-top: 0.3rem;
   background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preview-container.user-image {
+  border-radius: 50%;
+  width: 8rem;
+  height: 8rem;
+  margin-top: 0.3rem;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-container.user-image p,
+.preview-container.place-image p {
+  color: var(--navy);
+  text-align: center;
+  font-size: 0.9rem;
 }

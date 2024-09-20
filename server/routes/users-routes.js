@@ -1,7 +1,7 @@
 import express from "express";
 import { getUsers, login, signup } from "../controllers/users-controllers.js";
 import { check } from "express-validator";
-import { userImageUpload } from "../middlewares/file-upload.js";
+import userImageUpload from "../middlewares/file-upload.js";
 
 const router = express.Router();
 
@@ -11,7 +11,7 @@ router.post("/login", login);
 
 router.post(
   "/signup",
-  userImageUpload.single("image"),
+  userImageUpload,
   [
     check("name").not().isEmpty(),
     check("email").normalizeEmail().isEmail(),

@@ -1,15 +1,21 @@
 import placesRoutes from "./routes/places-routes.js";
 import usersRoutes from "./routes/users-routes.js";
-import bodyParser from "body-parser";
 import HttpError from "./utils/http-error.js";
+import bodyParser from "body-parser";
+import cloudinary from "cloudinary";
 import mongoose from "mongoose";
 import express from "express";
 import dotenv from "dotenv";
-import path from "path";
 import cors from "cors";
-import fs from "fs";
 
 dotenv.config();
+
+// Cloudinary configuration
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+});
 
 const app = express();
 
@@ -29,16 +35,6 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
-app.use(
-  "/uploads/user-images",
-  express.static(path.join("uploads", "user-images"))
-);
-
-app.use(
-  "/uploads/place-images",
-  express.static(path.join("uploads", "place-images"))
-);
-
 // Define routes
 app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
@@ -51,12 +47,18 @@ app.use((req, res, next) => {
 
 // Global error handler
 app.use((error, req, res, next) => {
-  if (req.file) {
-    fs.unlink(req.file.path, (err) => {
-      if (err) {
-        console.error("Error deleting file:", err);
+  // Cloudinary cleanup
+  if (req.file && req.file.cloudinaryPublicId) {
+    cloudinary.v2.uploader.destroy(
+      req.file.cloudinaryPublicId,
+      (err, result) => {
+        if (err) {
+          console.error("Error deleting file from Cloudinary:", err);
+        } else {
+          console.log("Cloudinary image deleted:", result);
+        }
       }
-    });
+    );
   }
 
   if (res.headersSent) {
@@ -65,7 +67,6 @@ app.use((error, req, res, next) => {
   // Ensure the status code is valid
   const statusCode =
     error.code && Number.isInteger(error.code) ? error.code : 500;
-
   res.status(statusCode).json({
     message: error.message || "An unknown error occurred",
   });

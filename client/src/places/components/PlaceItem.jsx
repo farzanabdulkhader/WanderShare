@@ -54,7 +54,7 @@ function PlaceItem({ place }) {
 
   return (
     <div className="place-item">
-      <img src={import.meta.env.VITE_ASSET_URL + `/${place.image}`} />
+      <img src={`${place.image.url}`} />
       <div className="place-text">
         <h2>{place.title}</h2>
         <p className="place-address">{place.address}</p>

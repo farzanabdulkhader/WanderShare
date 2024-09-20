@@ -3,6 +3,8 @@ import { validationResult } from "express-validator";
 import User from "../models/usersModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import cloudinary from "cloudinary";
+import getDataUrl from "../bufferGenerator.js";
 
 // GET ALL USERS
 const getUsers = async (req, res, next) => {
@@ -55,12 +57,29 @@ const signup = async (req, res, next) => {
     return next(new HttpError("Could not create user. Please try again"));
   }
 
+  let image;
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+    const fileBuffer = getDataUrl(file);
+    const cloud = await cloudinary.v2.uploader.upload(fileBuffer.content);
+
+    image = {
+      url: cloud.secure_url,
+      id: cloud.public_id,
+    };
+  } catch (err) {
+    console.log(err);
+  }
+
   // Create a new User object using the Mongoose model
   const createdUser = new User({
     name,
     email,
     password: hashedPassword,
-    image: req.file.path,
+    image,
     places: [], // Initialize with an empty array of places
   });
 

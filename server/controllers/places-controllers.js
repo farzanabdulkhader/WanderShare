@@ -3,6 +3,8 @@ import HttpError from "../utils/http-error.js";
 import getCoord from "../utils/geocodingApi.js";
 import mongoose from "mongoose";
 import Place from "../models/placesModel.js";
+import cloudinary from "cloudinary";
+import getDataUrl from "../bufferGenerator.js";
 import User from "../models/usersModel.js";
 import fs from "fs";
 
@@ -27,7 +29,7 @@ const getPlaceById = async (req, res, next) => {
   res.json({ place: place.toObject({ getters: true }) });
 };
 
-// GET PLACES BY USER ID ----------------------------------------------------------------
+// GET PLACES BY USER ID -------------------------------------------------------------
 const getPlacesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
   let userWithPlaces;
@@ -69,13 +71,28 @@ const createPlace = async (req, res, next) => {
     return next(new HttpError("Address not found.", 422));
   }
 
+  let image;
+  try {
+    const file = req.file;
+    if (!file) {
+      return next(new HttpError("No file uploaded", 400));
+    }
+    const fileBuffer = getDataUrl(file);
+    const cloud = await cloudinary.v2.uploader.upload(fileBuffer.content);
+    image = { url: cloud.secure_url, id: cloud.public_id };
+    // Store cloudinary public ID in req.file for possible cleanup
+    // req.file.cloudinaryPublicId = cloud.public_id;
+  } catch (err) {
+    return next(new HttpError("Image upload failed. Please try again.", 500));
+  }
+
   // Create a new Place object using the Mongoose model
   const createdPlace = new Place({
     title,
     description,
     address,
     location: coordinates,
-    image: req.file.path,
+    image,
     creator: req.userData.userId,
   });
 
@@ -165,7 +182,7 @@ const deletePlace = async (req, res, next) => {
     return next(new HttpError("You are not allowed to delete this place", 401));
   }
 
-  const imagePath = place.image;
+  const imageId = place.image.id;
 
   try {
     // Start a session and transaction to ensure both the place deletion and user update are saved atomically
@@ -181,9 +198,8 @@ const deletePlace = async (req, res, next) => {
     );
   }
 
-  fs.unlink(imagePath, (err) => {
-    console.log(err);
-  });
+  // Delete the image from Cloudinary
+  await cloudinary.v2.uploader.destroy(imageId);
 
   res.status(200).json({ message: "Place deleted successfully." });
 };
