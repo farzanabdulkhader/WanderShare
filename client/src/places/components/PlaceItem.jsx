@@ -42,7 +42,8 @@ function PlaceItem({ place }) {
         null,
         { Authorization: "Bearer " + token }
       );
-      window.location.reload();
+      // window.location.reload();
+      navigate(`/${user.id}/places`);
     } catch (err) {
       console.log(err.message);
     }
