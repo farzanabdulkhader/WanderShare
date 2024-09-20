@@ -8,7 +8,7 @@ var requestOptions = {
 async function getCoord(address) {
   const encodedAddress = encodeURIComponent(address);
   const res = await fetch(
-    `https://api.geoapify.com/v1/geocode/search?text=${encodedAddress}&apiKey=${process.env.production.GEOCODING_API_KEY}`,
+    `https://api.geoapify.com/v1/geocode/search?text=${encodedAddress}&apiKey=${process.env.GEOCODING_API_KEY}`,
     requestOptions
   );
   const data = await res.json();

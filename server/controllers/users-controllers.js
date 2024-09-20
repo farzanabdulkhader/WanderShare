@@ -95,7 +95,7 @@ const signup = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: createdUser.id, email: createdUser.email },
-      process.env.production.JWT_KEY,
+      process.env.JWT_KEY,
       { expiresIn: "1hr" }
     );
   } catch (err) {
@@ -104,12 +104,15 @@ const signup = async (req, res, next) => {
     );
   }
 
+  console.log(createdUser.image.url);
+
   // Convert Mongoose document to plain JavaScript object and send as response
   res.status(201).json({
     user: {
       id: createdUser.id,
       email: createdUser.email,
       name: createdUser.name,
+      image: createdUser.image.url,
     },
     token: token,
   });
@@ -154,7 +157,7 @@ const login = async (req, res, next) => {
   try {
     token = jwt.sign(
       { userId: existingUser.id, email: existingUser.email },
-      process.env.production.JWT_KEY,
+      process.env.JWT_KEY,
       { expiresIn: "1hr" }
     );
   } catch (err) {
@@ -168,6 +171,7 @@ const login = async (req, res, next) => {
       id: existingUser.id,
       email: existingUser.email,
       name: existingUser.name,
+      image: existingUser.image.url,
     },
     token: token,
   });

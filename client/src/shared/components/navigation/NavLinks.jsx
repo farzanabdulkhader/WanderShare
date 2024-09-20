@@ -2,13 +2,10 @@ import { NavLink, useParams } from "react-router-dom";
 import "./NavLinks.css";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useEffect } from "react";
+import Profile from "./Profile.jsx";
 
 function NavLinks() {
   const { isAuthenticated, logout, user } = useAuth();
-
-  function handleLogout() {
-    logout();
-  }
 
   return (
     <ul className="nav-links">
@@ -49,15 +46,7 @@ function NavLinks() {
               My Places
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              onClick={handleLogout}
-              to="/"
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              Logout
-            </NavLink>
-          </li>
+          {isAuthenticated && <Profile user={user} logout={logout} />}
         </>
       )}
     </ul>

@@ -39,7 +39,7 @@ function UpdatePlace() {
         const place = await sendRequest(
           import.meta.env.VITE_BACKEND_URL + `/places/${placeId}`
         );
-        console.log("GET PLACE RESPONSE:", place);
+        // console.log("GET PLACE RESPONSE:", place);
 
         setSelectedPlace({
           title: place.place.title,

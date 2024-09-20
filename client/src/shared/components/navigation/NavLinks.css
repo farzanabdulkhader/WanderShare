@@ -35,3 +35,9 @@
 .nav-links a.active-link {
   color: var(--orange);
 }
+
+.profile-image {
+  border-radius: 50%;
+  height: 2.8rem;
+  width: 2.8rem;
+}
